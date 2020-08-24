@@ -21,12 +21,20 @@ app.use(express.urlencoded({extended: true}));
 
 // --- Routes ---
 
-app.get('/hello', (req, res) => {
-  console.log('home base reached');
-  res.render('pages/index');
-})
+app.get('/hello', renderIndex);
+app.get('/searches/new', renderNew);
 
 // --- Route Handlers ---
+
+function renderIndex(req, res) {
+  console.log('home base reached');
+  res.render('pages/index');
+}
+
+function renderNew(req, res) {
+  console.log(req);
+  res.render('pages/searches/new');
+}
 
 // --- Functions ---
 

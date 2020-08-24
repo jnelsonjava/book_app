@@ -17,6 +17,7 @@ An app to create and store a list of books for a user.
 
 08-24-2020 2:55pm - Initialized repo
 08-24-2020 4:00pm - Scaffold and set up server
+08-24-2020 4:35pm - Added search route
 
 ## Credits and Collaborations
 
@@ -36,15 +37,15 @@ Actual time needed to complete: 1hr
 
 ---
 
-Number and name of feature: ________________________________
+Number and name of feature: #2 API search form
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 45m
 
-Start time: _____
+Start time: 4:05pm
 
-Finish time: _____
+Finish time: 4:35pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30m
 
 ---
 
