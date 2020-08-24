@@ -15,7 +15,8 @@ An app to create and store a list of books for a user.
 
 ## Change Log
 
-08-24-2020 2:55pm - Initialized repo.
+08-24-2020 2:55pm - Initialized repo
+08-24-2020 4:00pm - Scaffold and set up server
 
 ## Credits and Collaborations
 
@@ -29,9 +30,9 @@ Estimate of time needed to complete: 1hr
 
 Start time: 3:00pm
 
-Finish time: _____
+Finish time: 4:00pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1hr
 
 ---
 
