@@ -19,6 +19,7 @@ An app to create and store a list of books for a user.
 08-24-2020 4:00pm - Scaffold and set up server
 08-24-2020 4:35pm - Added search route
 08-24-2020 7:30pm - Hooked up Google Books API and added search result route
+08-24-2020 9:30pm - Added error handling to API request and unhandled routes
 
 ## Credits and Collaborations
 
@@ -62,15 +63,15 @@ Actual time needed to complete: 170m
 
 ---
 
-Number and name of feature: ________________________________
+Number and name of feature: #4 Error handling
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 1hr
 
-Start time: _____
+Start time: 8:00pm
 
-Finish time: _____
+Finish time: 9:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1.5hr
 
 ---
 
