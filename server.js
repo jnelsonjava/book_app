@@ -18,11 +18,6 @@ app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(express.urlencoded({extended: true}));
-// app.use(function (err, req, res, next) {
-//   console.error(err.stack)
-//   res.status(500)
-//   res.render('pages/error')
-// })
 
 // --- Routes ---
 
@@ -69,14 +64,25 @@ function searchHandler(req, res) {
 // --- Functions ---
 
 function Book(bookObj) {
-  this.title = bookObj.volumeInfo.title || 'title missing';
-  this.author = bookObj.volumeInfo.authors || 'author missing';
+  const bookDetails = bookObj.volumeInfo;
+  this.title = bookDetails.title || 'title missing';
+  this.author = bookDetails.authors || 'author missing';
   // reference for changing http to https
   // https://stackoverflow.com/questions/5491196/rewriting-http-url-to-https-using-regular-expression-and-javascript/5491311
-  this.cover = bookObj.volumeInfo.imageLinks.thumbnail.replace(/^http:\/\//i, 'https://') || 'https://i.imgur.com/J5LVHEL.jpg';
-  this.description = bookObj.volumeInfo.description || 'description missing';
-  this.isbn = bookObj.volumeInfo.industryIdentifiers[0].identifier || 'isbn missing';
-  this.bookshelf = bookObj.volumeInfo.categories || 'category missing';
+  this.cover = bookDetails.imageLinks && bookDetails.imageLinks.thumbnail ?
+    bookDetails.imageLinks.thumbnail.replace(/^http:\/\//i, 'https://') :
+    'https://i.imgur.com/J5LVHEL.jpg';
+  this.description = bookDetails.description || 'description missing';
+  this.isbn = 'isbn missing';
+  for (let id of bookDetails.industryIdentifiers) {
+    // TODO: check if this needs to be specifically ISBN_10 or ISBN_13
+    if ((/^ISBN/g).test(id.type)) {
+      console.log('setting:', id);
+      this.isbn = id.identifier;
+      break;
+    }
+  }
+  this.bookshelf = bookDetails.categories || 'category missing';
 }
 
 function errorHandler(error, res) {
