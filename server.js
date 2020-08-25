@@ -23,6 +23,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.get('/hello', renderIndex);
 app.get('/searches/new', renderNew);
+app.post('/searches', searchHandler);
 
 // --- Route Handlers ---
 
@@ -32,11 +33,32 @@ function renderIndex(req, res) {
 }
 
 function renderNew(req, res) {
-  console.log(req);
   res.render('pages/searches/new');
 }
 
+function searchHandler(req, res) {
+  const apiUrl = 'https://www.googleapis.com/books/v1/volumes';
+  const query = `+in${req.body.searchType}:${req.body.userInput}`;
+
+  superagent.get(apiUrl)
+    .query({q: query})
+    .then(result => {
+      const bookList = result.body.items.slice(0, 10).map((bookObj => new Book(bookObj)));
+      console.log('len: ', bookList.length);
+      res.render('pages/searches/show', {books: bookList});
+    });
+}
+
 // --- Functions ---
+
+function Book(bookObj) {
+  this.title = bookObj.volumeInfo.title || 'title missing';
+  this.author = bookObj.volumeInfo.authors || 'author missing';
+  this.cover = bookObj.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
+  this.description = bookObj.volumeInfo.description || 'description missing';
+  this.isbn = bookObj.volumeInfo.industryIdentifiers[0].identifier || 'isbn missing';
+  this.bookshelf = bookObj.volumeInfo.categories || 'category missing';
+}
 
 // --- Server Startup ---
 
