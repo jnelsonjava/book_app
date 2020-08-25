@@ -12,5 +12,16 @@
 </head>
 <body>
   <h1>Success in the EJS!</h1>
+
+  <h3>Total books: <%= books.length %></h3>
+
+  <% for (let book of books) { %>
+    <img src="<%= book.cover %>" alt="">
+    <h2><%= book.title %></h2>
+    <h3><%= book.author %></h3>
+    <p><%= book.description %></p>
+  <% } %>
+
+
 </body>
 </html>

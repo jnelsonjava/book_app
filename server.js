@@ -6,11 +6,14 @@ const express = require('express');
 const superagent = require('superagent');
 require('dotenv').config();
 const cors = require('cors');
+const pg = require('pg');
 
 // --- Global Variables ---
 
 const app = express();
 const PORT = process.env.PORT || 3003;
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', (error) => console.error(error));
 
 // --- Express Configs ---
 
@@ -22,7 +25,6 @@ app.use(express.urlencoded({extended: true}));
 // --- Routes ---
 
   app.get('/', renderIndex);
-  app.get('/hello', renderIndex);
   app.get('/searches/new', renderNew);
   app.post('/searches', searchHandler);
 
@@ -39,8 +41,10 @@ app.use(express.urlencoded({extended: true}));
 
 function renderIndex(req, res) {
   console.log('home base reached');
-  // throw new Error('new error who dis');
-  res.render('pages/index');
+  client.query(`SELECT * FROM books`)
+    .then(queryResult => {
+      res.render('pages/index', {books: queryResult.rows});
+    })
 }
 
 function renderNew(req, res) {
@@ -55,7 +59,8 @@ function searchHandler(req, res) {
     .query({q: query})
     .then(result => {
       const bookList = result.body.items.slice(0, 10).map((bookObj => new Book(bookObj)));
-      console.log(bookList);
+      // console.log(bookList);
+      // res.send(bookList);
       res.render('pages/searches/show', {books: bookList});
     })
     .catch(error => errorHandler(error, res));
@@ -82,7 +87,7 @@ function Book(bookObj) {
       break;
     }
   }
-  this.bookshelf = bookDetails.categories || 'category missing';
+  this.category = bookDetails.categories || 'category missing';
 }
 
 function errorHandler(error, res) {
@@ -95,4 +100,7 @@ function errorHandler(error, res) {
 
 // --- Server Startup ---
 
-app.listen(PORT, () => console.log(`server listening on PORT: ${PORT}, all systems go`));
+client.connect()
+  .then( () => {
+    app.listen(PORT, () => console.log(`server listening on PORT: ${PORT}, all systems go`));
+  });
