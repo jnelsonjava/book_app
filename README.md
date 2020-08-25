@@ -1,7 +1,7 @@
 # Book App
 
 **Author**: Jack Nelson
-**Version**: 1.1.1
+**Version**: 1.1.2
 
 ## Overview
 
@@ -21,6 +21,7 @@ An app to create and store a list of books for a user.
 08-24-2020 7:30pm - Hooked up Google Books API and added search result route
 08-24-2020 9:30pm - Added error handling to API request and unhandled routes
 08-25-2020 3:40pm - Provisioned database and linked data to home page
+08-25-2020 4:30pm - Added book details route
 
 ## Credits and Collaborations
 
@@ -88,15 +89,15 @@ Actual time needed to complete: 105m
 
 ---
 
-Number and name of feature: ________________________________
+Number and name of feature: #6 Add details route
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 90m
 
-Start time: _____
+Start time: 3:45pm
 
-Finish time: _____
+Finish time: 4:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 45m
 
 ---
 

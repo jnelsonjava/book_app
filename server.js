@@ -24,18 +24,19 @@ app.use(express.urlencoded({extended: true}));
 
 // --- Routes ---
 
-  app.get('/', renderIndex);
-  app.get('/searches/new', renderNew);
-  app.post('/searches', searchHandler);
+app.get('/', renderIndex);
+app.get('/searches/new', renderNew);
+app.post('/searches', searchHandler);
+app.get('/books/:id', renderDetails);
 
-  // reference for error handling unused routes
-  // https://medium.com/@SigniorGratiano/express-error-handling-674bfdd86139
-  app.all('*', (req, res, next) => {
-    res.status(404).render('pages/error', {
-      status: 404,
-      message: `Can't find the ${req.originalUrl} route on this server!`
-    });
+// reference for error handling unused routes
+// https://medium.com/@SigniorGratiano/express-error-handling-674bfdd86139
+app.all('*', (req, res, next) => {
+  res.status(404).render('pages/error', {
+    status: 404,
+    message: `Can't find the ${req.originalUrl} route on this server!`
   });
+});
 
 // --- Route Handlers ---
 
@@ -59,11 +60,16 @@ function searchHandler(req, res) {
     .query({q: query})
     .then(result => {
       const bookList = result.body.items.slice(0, 10).map((bookObj => new Book(bookObj)));
-      // console.log(bookList);
-      // res.send(bookList);
       res.render('pages/searches/show', {books: bookList});
     })
     .catch(error => errorHandler(error, res));
+}
+
+function renderDetails(req, res) {
+  client.query('SELECT * FROM books WHERE id=$1', [req.params.id])
+    .then(queryResult => {
+      res.render('pages/books/show', {book: queryResult.rows[0]});
+    })
 }
 
 // --- Functions ---
