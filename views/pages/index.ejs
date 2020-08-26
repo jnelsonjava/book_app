@@ -5,15 +5,17 @@
   
   <%- include('../layout/header') %> 
 
-  <h1>Success in the EJS!</h1>
+  <main>
+  
+    <h3><%= books.length %> Saved Books</h3>
+  
+    <% for (let book of books) { %>
+      <!-- reference for passing objects into include -->
+      <!-- https://stackoverflow.com/questions/23788810/ejs-pass-variable-when-include/39487333 -->
+      <%- include('books/detail', {book}) %> 
+    <% } %>
 
-  <h3>Total books: <%= books.length %></h3>
-
-  <% for (let book of books) { %>
-    <!-- reference for passing objects into include -->
-    <!-- https://stackoverflow.com/questions/23788810/ejs-pass-variable-when-include/39487333 -->
-    <%- include('books/detail', {book}) %> 
-  <% } %>
+  </main>
 
   <%- include('../layout/footer') %>
 
