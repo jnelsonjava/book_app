@@ -28,6 +28,7 @@ app.get('/', renderIndex);
 app.get('/searches/new', renderNew);
 app.post('/searches', searchHandler);
 app.get('/books/:id', renderDetails);
+app.post('/books', addBook);
 
 // reference for error handling unused routes
 // https://medium.com/@SigniorGratiano/express-error-handling-674bfdd86139
@@ -72,12 +73,27 @@ function renderDetails(req, res) {
     })
 }
 
+function addBook(req, res) {
+  console.log('we in books');
+  const {cover, title, author, description, isbn, category} = JSON.parse(req.body.book);
+
+  const insertSql = `INSERT INTO books (cover, title, author, description, isbn, category) VALUES ($1, $2, $3, $4, $5, $6)`;
+  const valueArray = [cover, title, author, description, isbn, category];
+
+  client.query(insertSql, valueArray)
+    .then( () => {
+      console.log('inserted');
+      res.redirect('/');
+    })
+
+}
+
 // --- Functions ---
 
 function Book(bookObj) {
   const bookDetails = bookObj.volumeInfo;
   this.title = bookDetails.title || 'title missing';
-  this.author = bookDetails.authors || 'author missing';
+  this.author = bookDetails.authors.join(', ') || 'author missing';
   // reference for changing http to https
   // https://stackoverflow.com/questions/5491196/rewriting-http-url-to-https-using-regular-expression-and-javascript/5491311
   this.cover = bookDetails.imageLinks && bookDetails.imageLinks.thumbnail ?
