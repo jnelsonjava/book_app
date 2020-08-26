@@ -1,7 +1,7 @@
 # Book App
 
 **Author**: Jack Nelson
-**Version**: 1.1.3
+**Version**: 1.2.1
 
 ## Overview
 
@@ -24,6 +24,7 @@ An app to create and store a list of books for a user.
 08-25-2020 4:30pm - Added book details route
 08-25-2020 6:00pm - Functionality for saving new books to database
 08-25-2020 6:30pm - Moved repetetive HTML into EJS partials
+08-26-2020 4:30pm - Added ability to update book details
 
 ## Credits and Collaborations
 
@@ -129,15 +130,15 @@ Actual time needed to complete: 30m
 
 ---
 
-Number and name of feature: ________________________________
+Number and name of feature: #9 Update book details
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 90m
 
-Start time: _____
+Start time: 2:15pm
 
-Finish time: _____
+Finish time: 4:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 135m
 
 ---
 
