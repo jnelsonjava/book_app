@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Search</title>
-  <link rel="stylesheet" href="/styles/reset.css" type="text/css">
-  <link rel="stylesheet" href="/styles/base.css" type="text/css">
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
-  <link rel="stylesheet" href="/styles/modules.css" type="text/css">
 
-</head>
+<%- include('../../layout/head', {title: 'Book Search'}) %>
+
 <body>
 
-  <header>
-    <a href="/">Home</a>
-    <a href="/searches/new">New Search</a>
-  </header>
-
+  <%- include('../../layout/header') %>
+  
   <form action="/searches" method="POST">
     <legend>Book Search</legend>
     <label for="userInput">Enter a title or author </label>
@@ -29,5 +17,8 @@
     <input type="radio" name="searchType" value="author">
     <input type="submit" value="Search for a book">
   </form>
+
+  <%- include('../../layout/footer') %>
+
 </body>
 </html>

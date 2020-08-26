@@ -23,6 +23,7 @@ An app to create and store a list of books for a user.
 08-25-2020 3:40pm - Provisioned database and linked data to home page
 08-25-2020 4:30pm - Added book details route
 08-25-2020 6:00pm - Functionality for saving new books to database
+08-25-2020 6:30pm - Moved repetetive HTML into EJS partials
 
 ## Credits and Collaborations
 
@@ -114,15 +115,15 @@ Actual time needed to complete: 60m
 
 ---
 
-Number and name of feature: ________________________________
+Number and name of feature: #8 Layout EJS partials
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 60m
 
-Start time: _____
+Start time: 6:00pm
 
-Finish time: _____
+Finish time: 6:30pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 30m
 
 ---
 
