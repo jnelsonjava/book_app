@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search Results</title>
-  <link rel="stylesheet" href="/styles/reset.css" type="text/css">
-  <link rel="stylesheet" href="/styles/base.css" type="text/css">
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
-  <link rel="stylesheet" href="/styles/modules.css" type="text/css">
-</head>
+
+<%- include('../../layout/head', {title: 'Search Results'}) %>
+
 <body>
   
-  <header>
-    <a href="/">Home</a>
-    <a href="/searches/new">New Search</a>
-  </header>
-
+  <%- include('../../layout/header') %>
+  
   <% for (let book of books) { %>
     <section>
       <img src="<%= book.cover %>" alt="">
@@ -27,7 +16,9 @@
         <input type="submit" value="Select this Book">
       </form>
     </section>
-  <% } %>
+    <% } %>
+    
+    <%- include('../../layout/footer') %>
 
 </body>
 </html>
