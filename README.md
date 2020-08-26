@@ -1,7 +1,7 @@
 # Book App
 
 **Author**: Jack Nelson
-**Version**: 1.1.2
+**Version**: 1.1.3
 
 ## Overview
 
@@ -22,6 +22,7 @@ An app to create and store a list of books for a user.
 08-24-2020 9:30pm - Added error handling to API request and unhandled routes
 08-25-2020 3:40pm - Provisioned database and linked data to home page
 08-25-2020 4:30pm - Added book details route
+08-25-2020 6:00pm - Functionality for saving new books to database
 
 ## Credits and Collaborations
 
@@ -101,15 +102,15 @@ Actual time needed to complete: 45m
 
 ---
 
-Number and name of feature: ________________________________
+Number and name of feature: #7 Add books to database
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 90m
 
-Start time: _____
+Start time: 5:00pm
 
-Finish time: _____
+Finish time: 6:00pm
 
-Actual time needed to complete: _____
+Actual time needed to complete: 60m
 
 ---
 
