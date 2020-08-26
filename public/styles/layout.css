@@ -1,0 +1,46 @@
+body {
+  max-width: 450px;
+  margin: auto;
+  /* display: grid; */
+  /* grid-template-rows: 75px 1fr 30px; */
+  outline: tomato 1px solid;
+}
+
+header {
+  background-color: violet;
+  height: 60px;
+}
+
+main {
+  overflow: hidden;
+}
+
+main > h3 {
+  height: 40px;
+}
+
+main > section {
+  /* float: left; */
+  border: yellow 1px dotted;
+  width: 90%;
+  margin: auto;
+  margin-top: 40px;
+  height: 600px;
+}
+
+footer {
+  background-color: turquoise;
+  height: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

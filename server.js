@@ -42,7 +42,6 @@ app.all('*', (req, res, next) => {
 // --- Route Handlers ---
 
 function renderIndex(req, res) {
-  console.log('home base reached');
   client.query(`SELECT * FROM books`)
     .then(queryResult => {
       res.render('pages/index', {books: queryResult.rows});
@@ -74,7 +73,6 @@ function renderDetails(req, res) {
 }
 
 function addBook(req, res) {
-  console.log('we in books');
   const {cover, title, author, description, isbn, category} = JSON.parse(req.body.book);
 
   const insertSql = `INSERT INTO books (cover, title, author, description, isbn, category) VALUES ($1, $2, $3, $4, $5, $6)`;
@@ -82,7 +80,7 @@ function addBook(req, res) {
 
   client.query(insertSql, valueArray)
     .then( () => {
-      console.log('inserted');
+      console.log(`saved ${title} by ${author} to DB`);
       res.redirect('/');
     })
 
@@ -104,7 +102,6 @@ function Book(bookObj) {
   for (let id of bookDetails.industryIdentifiers) {
     // TODO: check if this needs to be specifically ISBN_10 or ISBN_13
     if ((/^ISBN/g).test(id.type)) {
-      console.log('setting:', id);
       this.isbn = id.identifier;
       break;
     }

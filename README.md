@@ -27,7 +27,9 @@ An app to create and store a list of books for a user.
 
 ## Credits and Collaborations
 
-
+Fonts:
+  - Rubik by Hubert and Fischer, Meir Sadan, and Cyreal
+  - EB Garamond by Georg Duffner
 
 ## Feature Tracking
 

@@ -1,0 +1,21 @@
+
+
+section {
+  display: grid;
+  grid-template-rows: 45% repeat(10, 1fr);
+  justify-items: center;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+section > p {
+  grid-row-end: span 4;
+  overflow: auto;
+}
+
+section > * {
+  /* outline: red 1px solid; */
+}
+
+
+
