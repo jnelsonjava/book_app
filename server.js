@@ -7,6 +7,7 @@ const superagent = require('superagent');
 require('dotenv').config();
 const cors = require('cors');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 // --- Global Variables ---
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(express.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 
 // --- Routes ---
 
@@ -29,6 +31,7 @@ app.get('/searches/new', renderNew);
 app.post('/searches', searchHandler);
 app.get('/books/:id', renderDetails);
 app.post('/books', addBook);
+app.put('/books/:id', updateBook);
 
 // reference for error handling unused routes
 // https://medium.com/@SigniorGratiano/express-error-handling-674bfdd86139
@@ -68,7 +71,13 @@ function searchHandler(req, res) {
 function renderDetails(req, res) {
   client.query('SELECT * FROM books WHERE id=$1', [req.params.id])
     .then(queryResult => {
-      res.render('pages/books/show', {book: queryResult.rows[0]});
+      client.query('SELECT DISTINCT category FROM books')
+        .then(categoryResult => {
+          res.render('pages/books/show', {
+            book: queryResult.rows[0],
+            categories: categoryResult.rows.map(cat => cat.category)
+          });
+        })
     })
 }
 
@@ -83,7 +92,27 @@ function addBook(req, res) {
       console.log(`saved ${title} by ${author} to DB`);
       res.redirect('/');
     })
+}
 
+function updateBook(req, res) {
+  const {title, author, cover, description, isbn, category, id} = req.body;
+
+  const updateSql = `UPDATE books SET
+                      title=$1,
+                      author=$2,
+                      cover=$3,
+                      description=$4,
+                      isbn=$5,
+                      category=$6
+                      WHERE id=$7`;
+  const valueArray = [title, author, cover, description, isbn, category, id];
+
+  client.query(updateSql, valueArray)
+    .then( (result) => {
+      console.log(`updated ${title} by ${author}`);
+      res.redirect(`/books/${id}`);
+    })
+    .catch(error => errorHandler(error, res));
 }
 
 // --- Functions ---
@@ -106,7 +135,7 @@ function Book(bookObj) {
       break;
     }
   }
-  this.category = bookDetails.categories || 'category missing';
+  this.category = bookDetails.categories ? bookDetails.categories[0] : 'category missing';
 }
 
 function errorHandler(error, res) {
