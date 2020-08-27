@@ -1,3 +1,6 @@
+<% const min = display.min ? 'style=display:none;' : '' %>
+<% console.log(min) %> 
+
 <section>
   <div>
     <img src="<%= book.cover %>" alt="">
@@ -5,9 +8,11 @@
   <h2><%= book.title %></h2>
   <h3><%= book.author %></h3>
   <p><%= book.description %></p>
-  <h4>ISBN: <%= book.isbn %></h4>
-  <h4>Bookshelf: <%= book.category %></h4>
-  <a href="/books/<%= book.id %>">View Details</a>
-  <button id="formDisplay" type="submit">Update Details</button>
-  <button id="deleteBook" type="submit">Delete Book</button>
+  <h4 <%= min %>>ISBN: <%= book.isbn %></h4>
+  <h4 <%= min %>>Bookshelf: <%= book.category %></h4>
+  <a href="/books/<%= book.id %>" <%= !display.det ? 'style=display:none;' : '' %>>View Details</a>
+  <button id="formDisplay" type="submit" <%= min %>>Update Details</button>
+  <form action="/books/<%= book.id %>?_method=DELETE" method="POST" <%= min %>>
+    <button type="submit">Delete Book</button>
+  </form>
 </section>
