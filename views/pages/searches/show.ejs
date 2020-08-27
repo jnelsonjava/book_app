@@ -8,17 +8,10 @@
   <main>
 
     <% for (let book of books) { %>
-      <section>
-        <img src="<%= book.cover %>" alt="">
-        <h2><%= book.title %></h2>
-        <h3><%= book.author %></h3>
-        <p><%= book.description %></p>
-        <form action="/books" method="POST">
-          <input style="display: none;" type="text" name="book" value="<%= JSON.stringify(book) %>">
-          <input type="submit" value="Select this Book">
-        </form>
-      </section>
-      <% } %>
+
+      <%- include('../books/detail', {book, display: {min: true, det: false, desc: true, sel: true}}) %> 
+
+    <% } %>
 
   </main>
     

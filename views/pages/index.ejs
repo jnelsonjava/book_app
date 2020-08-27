@@ -12,7 +12,7 @@
     <% for (let book of books) { %>
       <!-- reference for passing objects into include -->
       <!-- https://stackoverflow.com/questions/23788810/ejs-pass-variable-when-include/39487333 -->
-      <%- include('books/detail', {book, display: {min: true, det: true}}) %> 
+      <%- include('books/detail', {book, display: {min: true, det: true, desc: false, sel: false}}) %> 
     <% } %>
 
   </main>
