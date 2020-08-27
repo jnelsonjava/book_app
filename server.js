@@ -32,6 +32,7 @@ app.post('/searches', searchHandler);
 app.get('/books/:id', renderDetails);
 app.post('/books', addBook);
 app.put('/books/:id', updateBook);
+app.delete('/books/:id', deleteBook);
 
 // reference for error handling unused routes
 // https://medium.com/@SigniorGratiano/express-error-handling-674bfdd86139
@@ -113,6 +114,15 @@ function updateBook(req, res) {
       res.redirect(`/books/${id}`);
     })
     .catch(error => errorHandler(error, res));
+}
+
+function deleteBook(req, res) {
+  console.log('we in bby')
+  // res.send(req.params);
+  client.query('DELETE FROM books WHERE id=$1', [req.params.id])
+    .then( () => {
+      res.redirect('/');
+    })
 }
 
 // --- Functions ---
