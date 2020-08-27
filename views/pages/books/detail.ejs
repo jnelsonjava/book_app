@@ -1,5 +1,7 @@
 <% const min = display.min ? 'style=display:none;' : '' %>
-<% console.log(min) %> 
+<% const desc = !display.desc ? 'style=display:none;' : '' %>
+<% const det = !display.det ? 'style=display:none;' : '' %>
+<% const sel = !display.sel ? 'style=display:none;' : '' %>
 
 <section>
   <div>
@@ -7,12 +9,16 @@
   </div>
   <h2><%= book.title %></h2>
   <h3><%= book.author %></h3>
-  <p><%= book.description %></p>
+  <p <%= desc %>><%= book.description %></p>
   <h4 <%= min %>>ISBN: <%= book.isbn %></h4>
   <h4 <%= min %>>Bookshelf: <%= book.category %></h4>
-  <a href="/books/<%= book.id %>" <%= !display.det ? 'style=display:none;' : '' %>>View Details</a>
+  <a href="/books/<%= book.id %>" <%= det %>>View Details</a>
   <button id="formDisplay" type="submit" <%= min %>>Update Details</button>
   <form action="/books/<%= book.id %>?_method=DELETE" method="POST" <%= min %>>
     <button type="submit">Delete Book</button>
+  </form>
+  <form action="/books" method="POST" <%= sel %>>
+    <input style="display: none;" type="text" name="book" value="<%= JSON.stringify(book) %>">
+    <input type="submit" value="Select this Book">
   </form>
 </section>

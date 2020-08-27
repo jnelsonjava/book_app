@@ -118,7 +118,6 @@ function updateBook(req, res) {
 
 function deleteBook(req, res) {
   console.log('we in bby')
-  // res.send(req.params);
   client.query('DELETE FROM books WHERE id=$1', [req.params.id])
     .then( () => {
       res.redirect('/');
@@ -139,7 +138,6 @@ function Book(bookObj) {
   this.description = bookDetails.description || 'description missing';
   this.isbn = 'isbn missing';
   for (let id of bookDetails.industryIdentifiers) {
-    // TODO: check if this needs to be specifically ISBN_10 or ISBN_13
     if ((/^ISBN/g).test(id.type)) {
       this.isbn = id.identifier;
       break;
